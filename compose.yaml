@@ -1,0 +1,23 @@
+services:
+  couchdb:
+    environment:
+      COUCHDB_USER: admin
+      COUCHDB_PASSWORD: admin
+    image: "couchdb"
+    ports:
+      - 127.0.0.1:5984:5984
+
+  haproxy:
+    image: haproxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./etc/haproxy:/usr/local/etc/haproxy:ro
+      - /etc/letsencrypt:/etc/letsencrypt
+
+  nginx:
+    image: nginx
+
+
+
