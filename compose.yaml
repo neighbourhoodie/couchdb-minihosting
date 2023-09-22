@@ -1,13 +1,15 @@
 services:
   couchdb:
     environment:
-      COUCHDB_USER: admin
-      COUCHDB_PASSWORD: admin
+      COUCHDB_USER: "${COUCHDB_USER}"
+      COUCHDB_PASSWORD: "${COUCHDB_PASS}"
     image: "couchdb"
     ports:
       - 127.0.0.1:5984:5984
 
   haproxy:
+    environment:
+      DOMAIN: "${DOMAIN}"
     image: haproxy
     ports:
       - 80:80
