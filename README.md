@@ -53,7 +53,7 @@ docker-compose up -d
 
 Finish running the `post-install.sh` script
 ```sh
-./start.sh
+./post-install.sh
 ```
 
 
