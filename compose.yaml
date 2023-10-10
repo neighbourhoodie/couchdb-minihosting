@@ -3,7 +3,9 @@ services:
     environment:
       COUCHDB_USER: "${COUCHDB_USER}"
       COUCHDB_PASSWORD: "${COUCHDB_PASS}"
-    image: "couchdb"
+    image: couchdb
+    volumes:
+      - /root/src/couchdb-mini-hosting/couchdb/data:/opt/couchdb/data
     ports:
       - 127.0.0.1:5984:5984
 
@@ -20,6 +22,5 @@ services:
 
   nginx:
     image: nginx
-
 
 
