@@ -14,8 +14,17 @@ set +a
 
 apt install docker-compose
 
-sudo docker run -it --rm  -p 80:80 -p 443:443 --name certbot -v "/etc/letsencrypt:/etc/letsencrypt" -v "/var/lib/letsencrypt:/var/lib/letsencrypt" certbot/certbot certonly --standalone -d "$DOMAIN" --email "$CERTBOT_EMAIL" --agree-tos --keep --non-interactive
+mkdir -p ./data/etc/letsencrypt
+mkdir -p ./data/var/lib/letsencrypt
+mkdir -p ./data/couchdb
+
+sudo docker run -it --rm \
+ -p 80:80 -p 443:443 \
+ --name certbot \
+ -v "./data/etc/letsencrypt:/etc/letsencrypt" \
+ -v "./data/var/lib/letsencrypt:/var/lib/letsencrypt" \
+ certbot/certbot certonly \
+ --standalone -d "$DOMAIN" --email "$CERTBOT_EMAIL" \
+ --agree-tos --keep --non-interactive
 
 chmod -R go+rx /etc/letsencrypt/
-
-mkdir -p couchdb/data

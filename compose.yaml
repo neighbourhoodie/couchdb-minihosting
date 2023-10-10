@@ -5,7 +5,7 @@ services:
       COUCHDB_PASSWORD: "${COUCHDB_PASS}"
     image: couchdb
     volumes:
-      - /root/src/couchdb-mini-hosting/couchdb/data:/opt/couchdb/data
+      - ./data/couchdb:/opt/couchdb/data
     ports:
       - 127.0.0.1:5984:5984
 
@@ -17,10 +17,17 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - ./etc/haproxy:/usr/local/etc/haproxy:ro
-      - /etc/letsencrypt:/etc/letsencrypt
+      - ./data/etc/haproxy:/usr/local/etc/haproxy:ro
+      - ./data/etc/letsencrypt:/etc/letsencrypt:ro
 
   nginx:
+    environment:
+      DOMAIN: "${DOMAIN}"
     image: nginx
+    volumes:
+      - ./data/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+    # $ docker run --name my-custom-nginx-container -v -d nginx
+
 
 
