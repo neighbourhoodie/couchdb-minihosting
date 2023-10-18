@@ -33,3 +33,6 @@ cd -
 
 chmod -R go+rx /etc/letsencrypt/
 chmod -R go+rx ./data/etc/letsencrypt/
+
+mv renew_certificate_job /etc/cron.d/renew_certificate_job
+chmod +x renew-certificate.sh
