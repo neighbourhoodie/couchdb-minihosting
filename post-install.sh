@@ -7,9 +7,6 @@ if [ ! -f .env ]; then
   exit 1
 fi
 
-ls -la
-echo " "
-
 set -a
 source .env
 set +a

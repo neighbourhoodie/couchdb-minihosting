@@ -28,6 +28,3 @@ services:
       - ./data/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
     # $ docker run --name my-custom-nginx-container -v -d nginx
-
-
-
