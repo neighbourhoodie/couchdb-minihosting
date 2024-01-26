@@ -24,7 +24,10 @@ services:
     environment:
       DOMAIN: "${DOMAIN}"
     image: nginx
+    expose:
+      - "81"
     volumes:
       - ./data/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /home/deploy/web/latest:/home/deploy/web/latest:ro
 
     # $ docker run --name my-custom-nginx-container -v -d nginx
