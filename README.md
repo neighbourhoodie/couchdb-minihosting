@@ -57,4 +57,19 @@ Finish running the `post-install.sh` script
 ```
 
 
+### Eventual Setup
+
+Basic CouchDB Setup:
+```
+https://subdomain-couchdb.example.com/ -> couchdb
+                                     /.well-known -> nginx for letsencrypt
+```
+
+Optional webapp deployment:
+
+```
+https://subdomain-webapp.example.com/ -> nginx
+                                    /.well-known -> nginx for letsencrypt
+                                    /_api -> couchdb
+```
 
