@@ -12,6 +12,8 @@ set -a
 source .env
 set +a
 
+sudo useradd -m deploy
+
 apt install docker-compose
 
 mkdir -p ./data/etc/letsencrypt
@@ -27,11 +29,10 @@ sudo docker run -it --rm \
  --standalone -d "$DOMAIN" --email "$CERTBOT_EMAIL" \
  --agree-tos --keep --non-interactive
 
-cd data/etc/letsencrypt/live/mini.backend.lol/
+cd data/etc/letsencrypt/live/$DOMAIN/
   cat fullchain.pem privkey.pem > haproxychain.pem
 cd -
 
-chmod -R go+rx /etc/letsencrypt/
 chmod -R go+rx ./data/etc/letsencrypt/
 
 mv renew_certificate_job /etc/cron.d/renew_certificate_job
