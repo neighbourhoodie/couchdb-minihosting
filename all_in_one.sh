@@ -42,7 +42,16 @@ echo "Starting Docker Containers…"
 
 docker-compose up -d
 
+until curl -s -X GET http://localhost:5984 | jq -e '.couchdb == "Welcome"' >/dev/null; do
+  echo "Waiting for CouchDB to start..."
+  sleep 2
+done
+
+echo "CouchDB is ready!"
 echo "Setting up CouchDB…"
+
+# Make sure docker hasn't stolen deploy’s directory
+chown deploy /home/deploy/web
 
 curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_users
 curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_replicator
