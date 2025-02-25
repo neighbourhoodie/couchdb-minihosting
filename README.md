@@ -1,75 +1,80 @@
-TODO:
-- [x] make domain configurable in haproxy
-- [ ] letsencrypt folder permissions: moiunt :ro
-- [ ] map port 80 to just nginx/well known
-- [ ] set up certbot container for renewals
-- [x] post startup script that creates _users and _replicator
-- [x] move couch credentials in to .env file
-- [ ] set up certbot cronjob or self-update
+# CouchDB Minihosting
 
-Usage:
-- sudo docker run -it --rm  -p 80:80 -p 443:443 --name certbot             -v "/etc/letsencrypt:/etc/letsencrypt"             -v "/var/lib/letsencrypt:/var/lib/letsencrypt"             certbot/certbot certonly --standalone -d mini.backend.lol --email jan@neigbourhood.ie --agree-tos --keep --non-interactive
-  - wrap this in a shell script that sources .env
-  - chmod -R go+rx /etc/letsencrypt/ so we can map them into haproxy
-    - maybe map these all into ./
-- docker-compose up -d
+A set of scripts that will let you host a CouchDB instance plus a web project which uses that instance on a Linux server, with https and automatic certificate renewal, all within a matter of minutes.
 
-# Final imagined usage:
+This works very well with a Ubuntu 24.10 x64 droplet on DigitalOcean, for example.
 
-# set up vps
+## What you’ll get in the end
 
-# set up dns
+- A CouchDB instance with an admin user
+- A haproxy and an nginx instance that:
+  - redirect all requests to `/_api` to that CouchDB
+  - handle letsencrypt/certbot
+  - host your web project at `/`
+- A deploy script that will let you deploy or roll back your web project, using a separate `deploy` user on the target system. For details on how to use this, consult `/deployment/README.md`.
 
-# Steps
+These instances are run using Docker.
 
-Clone the repository
+## Prerequisites
+
+1. A Linux server, and ssh root access to it.
+2. A domain name set up to point to that server.
+3. The ability to git clone this repo onto the server, or get it there some other way.
+
+# Setup
+
+On your server:
+
+Clone this repository and enter the folder:
 ```sh
-git clone couchdb-mini-hosting
 git clone git@github.com:neighbourhoodie/couchdb-mini-hosting.git
-
-# or via HTTP
-# git clone https://github.com/neighbourhoodie/couchdb-mini-hosting.git
-```
-
-Enter to the folder
-```sh
 cd couchdb-mini-hosting
 ```
 
-Modify the environment variables with your values
+Update the environment variables in `.env`.
+
+- `COUCHDB_USER` and `COUCHDB_PASS`: The credentials you’d like your CouchDB admin user to have
+- `DOMAIN`: The domain pointing to your server, without the protocol (eg. `backend.lol`).
+- `CERTBOT_EMAIL`: An email address for certificate expiration notifications. You don’t need to set this up anywhere in advance.
+
 ```sh
 nano .env
 ```
+(To save and exit Nano: `ctrl+o`, enter, `ctrl+x`).
 
-Run `start.sh` script
+Now run the `start.sh` script
 ```sh
 ./start.sh
 ```
 
-Start the services
+Start the services and check all three are running
 ```sh
 docker-compose up -d
+docker ps
 ```
 
-Finish running the `post-install.sh` script
+Finish setup by running the `post-install.sh` script
 ```sh
 ./post-install.sh
 ```
 
+Done. You should now be able to access Fauxton, CouchDB’s admin panel, at `$DOMAIN/_api/_utils/` and log in with `COUCHDB_USER` and `COUCHDB_PASS`. 🎊
 
-### Eventual Setup
+To also deploy a web project that uses your new CouchDB instance, to the server that
 
-Basic CouchDB Setup:
+# Tips and Tricks
+
+Some useful Docker commands
+
+```sh
+# See which Docker containers are running
+$ docker ps
+# Inspect the logs of a specific containers. You get the `container id` from `docker ps`
+$ docker logs < container id >
+# Shut everything down
+$ docker-compose down
+# Start everything up again
+$ docker-compose up -d
+# See logs from all containers together (you must be in /couchdb-mini-hosting for this to work)
+$ docker-compose logs
 ```
-https://subdomain-couchdb.example.com/ -> couchdb
-                                     /.well-known -> nginx for letsencrypt
-```
-
-Optional webapp deployment:
-
-```
-https://subdomain-webapp.example.com/ -> nginx
-                                    /.well-known -> nginx for letsencrypt
-                                    /_api -> couchdb
-```
-
