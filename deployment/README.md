@@ -35,8 +35,6 @@ chmod +x deploy.sh rollback.sh
 
 ## Deploy
 
-The `deploy.sh` script will create a 
-
 To execute the script, run
 ```sh
 ./deploy.sh
@@ -44,8 +42,12 @@ To execute the script, run
 
 ## Rollback
 
-To execute the script, run
+To rollback to the previous deployment, run:
 ```sh
 ./rollback.sh
 ```
 
+## Troubleshooting
+
+- `tar (child): bzip2: Cannot exec: No such file or directory`: You don’t have `bzip2` installed, see prerequisites above.
+- 

@@ -71,10 +71,11 @@ Some useful Docker commands
 $ docker ps
 # Inspect the logs of a specific containers. You get the `container id` from `docker ps`
 $ docker logs < container id >
-# Shut everything down
+# For any of the `docker-compose` commands to work, you must be in /couchdb-mini-hosting
+# Shut everything down 
 $ docker-compose down
 # Start everything up again
 $ docker-compose up -d
-# See logs from all containers together (you must be in /couchdb-mini-hosting for this to work)
+# See logs from all containers together
 $ docker-compose logs
 ```
