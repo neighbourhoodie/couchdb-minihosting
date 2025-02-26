@@ -1,46 +1,49 @@
 # Deployment
 
+This is a pair of scripts that allow you to easily deploy code from your dev machine, and roll back to the previous deployment in case your current one doesn’t work.
+
 ## Prerequisites
 
-- The directory where the deployment is going to host the web app needs to already exist. It is automatically created by the setup scripts in the root folder, by creating a `deploy` user with a corresponding user directory in `home`. This directory maps to the `WEB_PATH` variable in the `deploy.env` file, ideally, you won’t have to change it.
+- The directory where the server is going to host the web app needs to already exist. By default, this is `/home/deploy/web`. It is automatically created by the setup scripts in the root folder, by creating a `deploy` user with a corresponding user directory in `home`, and then adding a Docker volume used by nginx in `/web`. This directory maps to the `WEB_PATH` variable in the `deploy.env` file, and ideally, you won’t have to change it.
   
-- The server requires the following software to be installed:
+- ⚠️ The script **requires** the following software to be installed on the server:
   - `rysnc`
   - `bzip2`
 
-You can check if those are present with:
-```sh
-which rsync
-which bzip2
-```
+  You can check if those are present with:
+  ```sh
+  which rsync
+  which bzip2
+  ```
 
-If you are on a Linux distribution, these can be installed with:
-```sh
-sudo apt-get install rsync
-sudo apt-get install bzip2
-```
+  If you are on a Linux distribution, these can be installed with:
+  ```sh
+  sudo apt-get install rsync
+  sudo apt-get install bzip2
+  ```
 
 ## Setup
 
-- Copy the files in this folder into your repository. The `deploy.env` file and the two scripts need to be placed at the same level.
-- Give executable permissions to the scripts:
-```sh
-chmod +x deploy.sh rollback.sh
-```
-- Modify the `deploy.env` with your values.
-
-- *WEB_PATH*: The folder on the server you want to deploy to. Should probably be left as `/home/deploy/web`.
-- *TARGET*: The ssh target, should be `deploy@your.domain`, eg. `deploy@backend.lol`.
-- *DIR*: The directory you want to deploy. This is probably your `dist` or `build` folder.
+1. Copy the files in this folder into your repository. The `deploy.env` file and the two scripts need to be placed at the same level.
+2. Give executable permissions to the scripts:
+    ```sh
+    chmod +x deploy.sh rollback.sh
+    ```
+3. Modify the `deploy.env` with your values.
+   - `WEB_PATH`: The folder on the server you want to deploy to. Should probably be left as `/home/deploy/web`.
+   - `TARGET`: The ssh target, should be `deploy@your.domain`, eg. `deploy@backend.lol`.
+   - `DIR`: The directory you want to deploy. This is probably your `dist` or `build` folder.
 
 ## Deploy
 
-To execute the script, run
+To deploy the current state of the folder specified by the `DIR` var:
 ```sh
 ./deploy.sh
 ```
 
 ## Rollback
+
+The deploy script keeps the last three deployments on the server so you can quickly roll back to the previous state in case you’ve deployed something that doesn’t work.
 
 To rollback to the previous deployment, run:
 ```sh
@@ -50,4 +53,3 @@ To rollback to the previous deployment, run:
 ## Troubleshooting
 
 - `tar (child): bzip2: Cannot exec: No such file or directory`: You don’t have `bzip2` installed, see prerequisites above.
-- 
