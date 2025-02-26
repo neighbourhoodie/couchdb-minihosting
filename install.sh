@@ -12,7 +12,8 @@ set -a
 source .env
 set +a
 
-sudo useradd -m deploy
+# Add deploy user if it doesn’t already exist
+id -u deploy >/dev/null 2>&1 || sudo useradd -m deploy
 
 apt install docker-compose
 

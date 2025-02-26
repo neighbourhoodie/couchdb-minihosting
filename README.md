@@ -44,20 +44,9 @@ nano .env
 ```
 (To save and exit Nano: `ctrl+o`, enter, `ctrl+x`).
 
-Now run the `start.sh` script
+Now run the installation  script
 ```sh
-./start.sh
-```
-
-Start the services and check all three are running
-```sh
-docker-compose up -d
-docker ps
-```
-
-Finish setup by running the `post-install.sh` script
-```sh
-./post-install.sh
+./install.sh
 ```
 
 Done. You should now be able to access Fauxton, CouchDB’s admin panel, at `$DOMAIN/_api/_utils/` and log in with `COUCHDB_USER` and `COUCHDB_PASS`. The URL will also be logged to the terminal for convenience. 🎊
