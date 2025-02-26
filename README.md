@@ -1,13 +1,15 @@
 # CouchDB Minihosting
 
-A set of scripts that will let you host a CouchDB instance plus a web project which uses that instance on a Linux server, with https and automatic certificate renewal, all within a matter of minutes.
+CouchDB Minihosting is a set of scripts that will let you host a CouchDB instance plus an accompanying web project on a Linux server, with https and automatic certificate renewal, all within a matter of minutes.
 
 This works very well with a Ubuntu 24.10 x64 droplet on DigitalOcean, for example.
 
-## What you’ll get in the end
+CouchDB Minihosting is a great starting point for hosting smaller CouchDB projects, prototypes and internal tooling. Depending on how much you’re willing to pay for hardware, you can get quite far with this setup, and happily accommodate a couple of thousand users (your mileage may vary, depending on what you’re doing). At some point, however, the fact that you're running a database inside of Docker will be a limitation you’ll probably want to avoid. But that’s for future you to deal with! For now, present you can enjoy quick and simple CouchDB hosting.
+
+## What you’ll get
 
 - A CouchDB instance with an admin user
-- A haproxy and an nginx instance that:
+- A haproxy and an nginx setup that:
   - redirect all requests to `/_api` to that CouchDB
   - handle letsencrypt/certbot
   - host your web project at `/`
@@ -58,9 +60,13 @@ Finish setup by running the `post-install.sh` script
 ./post-install.sh
 ```
 
-Done. You should now be able to access Fauxton, CouchDB’s admin panel, at `$DOMAIN/_api/_utils/` and log in with `COUCHDB_USER` and `COUCHDB_PASS`. 🎊
+Done. You should now be able to access Fauxton, CouchDB’s admin panel, at `$DOMAIN/_api/_utils/` and log in with `COUCHDB_USER` and `COUCHDB_PASS`. The URL will also be logged to the terminal for convenience. 🎊
 
-To also deploy a web project that uses your new CouchDB instance, to the server that
+# Deploying a Web Project
+
+This repo also contains a deploy script. This is meant to be copied into the repo of the web project you want to run alongside CouchDB, and should be run from that repo. It uses a `deploy` user on the server which was already added by the installation script above.
+
+For more details on the deploy and rollback scripts, please check out the `/deployment/README.md`.
 
 # Tips and Tricks
 
