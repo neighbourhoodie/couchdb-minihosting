@@ -12,11 +12,14 @@ set -a
 source .env
 set +a
 
+echo "Adding deploy user to server if necessary…"
 # Add deploy user if it doesn’t already exist
 id -u deploy >/dev/null 2>&1 || sudo useradd -m deploy
 
+echo "Installing docker-compose…"
 apt install docker-compose
 
+echo "Setting up Letsencrypt…"
 mkdir -p ./data/etc/letsencrypt
 mkdir -p ./data/var/lib/letsencrypt
 mkdir -p ./data/couchdb
