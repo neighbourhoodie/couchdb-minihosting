@@ -4,7 +4,7 @@ CouchDB Minihosting is a set of scripts that will let you host a CouchDB instanc
 
 This works very well with a Ubuntu 24.10 x64 droplet on DigitalOcean, for example.
 
-CouchDB Minihosting is a great starting point for hosting smaller CouchDB projects, prototypes and internal tooling. Depending on how much you’re willing to pay for hardware, you can get quite far with this setup, and happily accommodate a couple of thousand users (your mileage may vary, depending on what you’re doing). At some point, however, the fact that you're running a database inside of Docker will be a limitation you’ll probably want to avoid. But that’s for future you to deal with! For now, present you can enjoy quick and simple CouchDB hosting.
+CouchDB Minihosting is a great starting point for hosting smaller CouchDB projects, prototypes and internal tooling. Depending on how much you’re willing to pay for hardware, you can get quite far with this setup, and happily accommodate a couple of thousand users (your mileage may vary, depending on what you’re doing). At some point, however, the fact that you're running a database inside of Docker will be a limitation you’ll probably want to avoid, and [we can help you with that](#commercial-and-production-deployments). But that’s for future you to deal with! For now, present you can enjoy quick and simple CouchDB hosting.
 
 ## What you’ll get
 
@@ -74,3 +74,10 @@ $ docker-compose up -d
 # See logs from all containers together
 $ docker-compose logs
 ```
+
+### Commercial and Production Deployments
+
+As noted above, this setup isn’t suitable for larger and more critical deployments. If you’re faced with such a task and are unsure about factors like sharding, scaling, high availability etc., [we, Neighbourhoodie Software, are available for consulting and hands-on assistance](https://neighbourhood.ie/). If you’ve already got a functioning CouchDB setup and would like it checked, we offer a [CouchDB Architecture Review](https://neighbourhood.ie/products-and-services/couchdb-architecture-review), where we inspect your setup and prepare a report with actionable suggestions for improvement, if necessary. Ongoing support retainers are also available!
+
+Please [get in touch with our lovely sales team](https://neighbourhood.ie/call) if you have any questions about commercial services. 👩‍💼 👨‍💼 
+
