@@ -65,7 +65,7 @@ Some useful Docker commands
 # See which Docker containers are running
 $ docker ps
 # Inspect the logs of a specific containers. You get the `container id` from `docker ps`
-$ docker logs < container id >
+$ docker logs CONTAINER_ID_HERE
 # For any of the `docker-compose` commands to work, you must be in /couchdb-mini-hosting
 # Shut everything down 
 $ docker-compose down
