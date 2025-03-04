@@ -70,7 +70,7 @@ Done. You should now be able to access Fauxton, CouchDB’s admin panel, at `$DO
 
 This repo also contains a deploy script. This is meant to be copied into the repo of the web project you want to run alongside CouchDB, and should be run from that repo. It uses a `deploy` user on the server which was already added by the installation script above.
 
-For more details on the deploy and rollback scripts, please check out the `[/deployment/README.md](/deployment/README.md)`.
+For more details on the deploy and rollback scripts, please check out the [`/deployment/README.md`](/deployment/README.md).
 
 # Tips and Tricks
 
