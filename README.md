@@ -57,7 +57,7 @@ nano .env
 (To save and exit Nano: `ctrl+o`, enter, `ctrl+x`).
 
 > [!IMPORTANT]
-> Note: The [install script](/neighbourhoodie/couchdb-minihosting/blob/main/install.sh) assumes you are not using this server for anything else. If you do, please give it a quick look to see if there is anything in there that would conflict with what you already have set up. If you run this on a VM with other things, we assume you are an expert user and generally know what you are doing.
+> Note: The [install script](/blob/main/install.sh) assumes you are not using this server for anything else. If you do, please give it a quick look to see if there is anything in there that would conflict with what you already have set up. If you run this on a VM with other things, we assume you are an expert user and generally know what you are doing.
 
 Now run the installation  script
 ```sh
@@ -70,7 +70,7 @@ Done. You should now be able to access Fauxton, CouchDB’s admin panel, at `$DO
 
 This repo also contains a deploy script. This is meant to be copied into the repo of the web project you want to run alongside CouchDB, and should be run from that repo. It uses a `deploy` user on the server which was already added by the installation script above.
 
-For more details on the deploy and rollback scripts, please check out the `[/deployment/README.md](/neighbourhoodie/couchdb-minihosting/blob/main/deployment/README.md)`.
+For more details on the deploy and rollback scripts, please check out the `[/deployment/README.md](/blob/main/deployment/README.md)`.
 
 # Tips and Tricks
 
