@@ -30,6 +30,9 @@ We are using Docker Compose to set all this up for you.
 
 1. A Linux server or virtual machine (VM), and `ssh`  with root access to it.
 2. A domain name set up to point to that server.
+  - If you don’t want to pay for a top level domain (TLD), here’s a list of free services that let you register a subdomain:
+    - https://freedns.afraid.org
+    
 3. The ability to git clone this repo onto the server, or get it there some other way.
 
 # Setup
@@ -93,6 +96,7 @@ $ docker-compose logs
 - [ ] Add nice error pages
 - [ ] Add metrics collector and populate a default dashboard with CouchDB metrics
 - [ ] Document how to add a backend container
+- [ ] Add tests / CI
 
 
 ### Commercial and Production Deployments
