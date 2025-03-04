@@ -17,7 +17,7 @@ echo "Adding deploy user to server if necessary…"
 id -u deploy >/dev/null 2>&1 || sudo useradd -m deploy
 
 echo "Installing docker-compose…"
-apt install docker-compose
+apt install -y docker-compose
 
 echo "Setting up Letsencrypt…"
 mkdir -p ./data/etc/letsencrypt

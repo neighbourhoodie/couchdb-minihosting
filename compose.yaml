@@ -29,5 +29,3 @@ services:
     volumes:
       - ./data/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - /home/deploy/web:/home/deploy/web:ro
-
-    # $ docker run --name my-custom-nginx-container -v -d nginx
