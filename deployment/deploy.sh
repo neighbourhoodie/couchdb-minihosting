@@ -18,6 +18,18 @@ APPNAME=`basename $DIR`
 
 echo "deploying $VERSION to $TARGET:$WEB_PATH/$VERSION"
 
+# Check if rsync exists here
+if ! command -v rsync >/dev/null 2>&1; then
+  echo "Error: rsync is not installed on this machine. Please install it and try again."
+  exit 1
+fi
+
+# Check if bzip exists there
+if ! ssh "$TARGET" "command -v bzip2 >/dev/null 2>&1"; then
+  echo "Error: bzip2 is not installed on $TARGET. Please install it and try again."
+  exit 1
+fi
+
 # create remote dir
 echo "create target dir"
 ssh $TARGET mkdir -p $WEB_PATH/$VERSION

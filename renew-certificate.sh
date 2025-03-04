@@ -20,7 +20,7 @@ sudo docker run -it  --rm \
   certonly --webroot --webroot-path=/etc/letsencrypt --non-interactive --agree-tos -d "${DOMAIN}" --email "${CERTBOT_EMAIL}"
 
 # Concatenate the resulting certificate chain and the private key and write it to HAProxy's certificate file.
-cd data/etc/letsencrypt/live/mini.backend.lol/
+cd data/etc/letsencrypt/live/$DOMAIN/
   cat fullchain.pem privkey.pem > haproxychain.pem
 cd -
 
