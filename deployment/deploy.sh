@@ -26,7 +26,7 @@ fi
 
 # Check if bzip exists there
 if ! ssh "$TARGET" "command -v bzip2 >/dev/null 2>&1"; then
-  echo "Error: bzip2 is not installed on $TARGET_SERVER. Please install it and try again."
+  echo "Error: bzip2 is not installed on $TARGET. Please install it and try again."
   exit 1
 fi
 
