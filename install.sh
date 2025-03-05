@@ -16,6 +16,11 @@ echo "Adding deploy user to server if necessary…"
 # Add deploy user if it doesn’t already exist
 id -u deploy >/dev/null 2>&1 || sudo useradd -m deploy
 
+# set up ssh key from root to deploy
+mkdir -p /home/deploy/.ssh
+cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+chown -R deploy:deploy /home/deploy/.ssh
+
 echo "Installing docker-compose…"
 apt install -y docker-compose
 

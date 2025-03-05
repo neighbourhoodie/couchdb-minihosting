@@ -23,24 +23,6 @@ This is a pair of scripts that allow you to easily deploy code from your dev mac
   sudo apt-get install -y rsync bzip2
   ```
 
-### Add the deploy user’s `ssh` key to the server
-
-The deploy user needs to be authorised to `ssh` into the host server. By default, `ssh` will attempt use your local default key to do this, this is usually something like `~/ssh/id_rsa`, but it depends. You can check which one is used by scanning through the verbose output of a connection attempt:
-
-```sh
-ssh -v deploy@YOUR_SERVER_IP_OR_DOMAIN_HERE
-```
-
-Look for a line with `Will attempt key:`, this will tell you which key to use. 
-
-There are many ways to get a public key onto a server, this is one of the simplest. After you've completed the installation in the root of this repo:
-
-1. On your machine, run `ssh-copy-id deploy@YOUR_SERVER_IP_OR_DOMAIN_HERE` and follow the instructions.
-2. You should now be able to `ssh` into your server as the deploy user: `ssh deploy@YOUR_SERVER_IP_OR_DOMAIN_HERE`
-3. If that works, the deploy script should work too. 
-
-You are of course free to use a different key than your default key and transfer it in a different manner, but that would exceed the scope of this readme. 
-
 ## Setup
 
 1. Copy the files in this folder into your repository. The `deploy.env` file and the two scripts need to be placed at the same level.
