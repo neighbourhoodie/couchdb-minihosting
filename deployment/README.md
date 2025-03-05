@@ -4,24 +4,34 @@ This is a pair of scripts that allow you to easily deploy code from your dev mac
 
 ## Prerequisites
 
-- The directory where the server is going to host the web app needs to already exist. By default, this is `/home/deploy/web`. It is automatically created by the install script in the root folder, by creating a `deploy` user with a corresponding user directory in `home`, and then adding a Docker volume used by nginx in `/web`. This directory maps to the `WEB_PATH` variable in the `deploy.env` file, and ideally, you won’t have to change it.
+1. The directory where the server is going to host the web app needs to already exist. By default, this is `/home/deploy/web`. It is automatically created by the install script in the root folder, by creating a `deploy` user with a corresponding user directory in `home`, and then adding a Docker volume used by nginx in `/web`. This directory maps to the `WEB_PATH` variable in the `deploy.env` file, and ideally, you won’t have to change it.
   
-- ⚠️ The script **requires** two pieces of software:
-  - `rysnc` must exist on the machine _from_ which you are deploying
-  - `bzip2` must exist on the server _to_ which you are deploying
+2. > [!IMPORTANT]
+   > The script **requires** two pieces of software:
+   >  - `rysnc` must exist on the machine _**from**_ which you are deploying
+   >  - `bzip2` must exist on the server _**to**_ which you are deploying
 
-  The script will check if these are present. If you want to do this manually:
+    The script will check if these are present and warn you if not.
 
-  You can check if those are present with:
-  ```sh
-  which rsync
-  which bzip2
-  ```
+    If you want to do this check manually:
+    ```sh
+    # On the dev machine:
+    which rsync
+    # On the server:
+    which bzip2
+    ```
 
-  If you are on a Linux distribution, these can be installed with:
-  ```sh
-  sudo apt-get install -y rsync bzip2
-  ```
+    **Installing rsync and bzip2**
+
+    - **rsync**: If your dev machine runs MacOS, `rsync` is already installed. On a Linux system, you can install it with:
+        ```sh
+        sudo apt-get install -y rsync
+        ```
+
+    - **bzip2**: On your Linux server, `bzip2` can be installed with:
+       ```sh
+       sudo apt-get install -y bzip2
+       ```
 
 ## Setup
 
