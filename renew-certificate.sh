@@ -11,7 +11,7 @@ set -a
 source .env
 set +a
 
-sudo docker run -it  --rm \
+sudo docker run  --rm \
   -e DOMAIN="${DOMAIN}" \
   -e CERTBOT_EMAIL="${CERTBOT_EMAIL}" \
   -v "$PWD/data/etc/letsencrypt:/etc/letsencrypt" \
