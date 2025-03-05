@@ -72,6 +72,13 @@ This repo also contains a deploy script. This is meant to be copied into the rep
 
 For more details on the deploy and rollback scripts, please check out the [`/deployment/README.md`](/deployment/README.md).
 
+# Automatic Certificate Renewal
+
+Certificate renewal is done via a CRON job on the first of each month. The CRON task will live in `/etc/cron.d/renew_certificate_job`, and it calls the `/renew-certificate.sh` script. Logs from that script go to `/var/log/syslog` and have the `renew-cert` prefix.
+
+> [!IMPORTANT]
+> Note: The [certificate renewal cronjob](renew_certificate_job) assumes that the path to the repo is `/root/couchdb-minihosting`, if you’ve cloned the repo somewhere else, please check `/etc/cron.d/renew_certificate_job` and modify that if necessary. 
+
 # Tips and Tricks
 
 Some useful Docker commands
@@ -81,7 +88,7 @@ Some useful Docker commands
 $ docker ps
 # Inspect the logs of a specific containers. You get the `container id` from `docker ps`
 $ docker logs CONTAINER_ID_HERE
-# For any of the `docker-compose` commands to work, you must be in /couchdb-mini-hosting
+# For any of the `docker-compose` commands to work, you must be in /couchdb-minihosting
 # Shut everything down 
 $ docker-compose down
 # Start everything up again

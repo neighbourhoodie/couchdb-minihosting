@@ -1,1 +1,1 @@
-0 0 1 * * root cd /root/couchdb-mini-hosting && ./renew-certificate.sh 2>&1 | logger -t renew-cert
+0 0 1 * * root cd /root/ && ./renew-certificate.sh 2>&1 | logger -t renew-cert
