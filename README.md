@@ -92,6 +92,7 @@ $ docker-compose logs
 
 ## Roadmap — Please Help!
 
+- [ ] add backups
 - [ ] Add way to run this on local dev machines and proper TLS certs but without Letsencrypt
 - [ ] Add nice error pages
 - [ ] Add metrics collector and populate a default dashboard with CouchDB metrics
