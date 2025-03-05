@@ -4,7 +4,7 @@
 
 *CouchDB Minihosting* allows you to try out CouchDB in a matter of minutes. It provides you with a CouchDB instance, automatic TLS with Letsencrypt and even allows you to deploy a web project if you’d like to [build](https://neighbourhood.ie/blog/2025/02/05/couchdb-is-great-for-prototypes-and-side-projects) an [Offline First](https://neighbourhood.ie/blog/2024/12/05/realtime-multiuser-kanban-board-with-couchdb) [app](https://neighbourhood.ie/blog/2019/05/10/an-offline-first-todo-list-with-svelte-pouchdb-and-couchdb) with [PouchDB](https://pouchdb.com).
 
-This works very well with a Ubuntu 24.10 x64 VM on a hosting provider of your choice, see [Hosting Providers](#hosting-providers) below for examples.
+This works very well with a Ubuntu 24.10 x64 VM on a hosting provider of your choice, see [Hosting Providers](#hosting-providers) below for examples. Any VM size will work, even the smallest one.
 
 CouchDB Minihosting is a great starting point for hosting smaller CouchDB projects, prototypes and internal tooling. Depending on how much you’re willing to pay for hardware, you can get quite far with this setup, and happily accommodate a couple of thousand users (your mileage may vary, depending on what you’re doing).
 
