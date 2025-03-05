@@ -4,3 +4,4 @@ data/etc/letsencrypt
 dist
 .DS_Store
 *.tgz
+.env
