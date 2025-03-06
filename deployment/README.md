@@ -6,10 +6,10 @@ This is a pair of scripts that allow you to easily deploy code from your dev mac
 
 1. The directory where the server is going to host the web app needs to already exist. By default, this is `/home/deploy/web`. It is automatically created by the install script in the root folder, by creating a `deploy` user with a corresponding user directory in `home`, and then adding a Docker volume used by nginx in `/web`. This directory maps to the `WEB_PATH` variable in the `deploy.env` file, and ideally, you won’t have to change it.
   
-2. > [!IMPORTANT]
-   > The script **requires** two pieces of software:
-   >  - `rysnc` must exist on the machine _**from**_ which you are deploying
-   >  - `bzip2` must exist on the server _**to**_ which you are deploying
+2. The script **requires** two pieces of software:
+    
+    - `rysnc` must exist on the machine _**from**_ which you are deploying
+    - `bzip2` must exist on the server _**to**_ which you are deploying
 
     The script will check if these are present and warn you if not.
 
@@ -37,7 +37,6 @@ This is a pair of scripts that allow you to easily deploy code from your dev mac
 
 1. Copy the files in this folder into your repository. The `deploy.env` file and the two scripts need to be placed at the same level.
 
-    ```
 2. Modify the `deploy.env` with your values.
    - `WEB_PATH`: The folder on the server you want to deploy to. Should probably be left as `/home/deploy/web`.
    - `TARGET`: The ssh target, should be `deploy@your.domain`, eg. `deploy@backend.lol`.
