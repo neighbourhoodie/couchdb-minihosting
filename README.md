@@ -65,6 +65,8 @@ This repo also contains a deploy script. This is meant to be copied into the rep
 
 For more details on the deploy and rollback scripts, please check out the [`/deployment/README.md`](/deployment/README.md).
 
+To get you started, we provide [Pouchnotes](https://github.com/neighbourhoodie/pouchnotes/), a demo project that gets you started with PouchDB, authentitation and replication.
+
 ## Automatic Certificate Renewal
 
 Certificate renewal is done via a CRON job on the first of each month. The CRON task will live in `/etc/cron.d/renew_certificate_job`, and it calls the `/renew-certificate.sh` script. Logs from that script go to `/var/log/syslog` and have the `renew-cert` prefix.
@@ -110,6 +112,10 @@ CouchDB Minihosting works with any generic hosting service, here are a few to ge
 - https://www.hetzner.com
 - https://www.ovhcloud.com/de/
 - https://www.vultr.com
+
+## FaQ
+
+*Why HAProxy, nginx & certbot instead of Caddy?* — First off, Caddy is great. For CouchDB Minihosting, we used the components that we run in production and that have not let us down in over 15 years of deploying CouchDB in production, so we are most comfortable supporting these. Secondly, we hope this project ([eventually](#roadmap--please-help)) become a blueprint for folks to learn what it takes to set up a production-grade CouchDB installation. That is not to say Caddy can’t serve this purpose or that we’re not open to changes, but for the time being we’d prefer contributions from the [roadmap](#roadmap--please-help).
 
 ### Commercial and Production Deployments
 
