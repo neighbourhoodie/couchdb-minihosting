@@ -8,6 +8,7 @@ services:
       - ./data/couchdb:/opt/couchdb/data
     ports:
       - 127.0.0.1:5984:5984
+    restart: unless-stopped
 
   haproxy:
     environment:
@@ -19,6 +20,7 @@ services:
     volumes:
       - ./data/etc/haproxy:/usr/local/etc/haproxy:ro
       - ./data/etc/letsencrypt:/etc/letsencrypt:ro
+    restart: unless-stopped
 
   nginx:
     environment:
@@ -29,3 +31,4 @@ services:
     volumes:
       - ./data/etc/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - /home/deploy/web:/home/deploy/web:ro
+    restart: unless-stopped
