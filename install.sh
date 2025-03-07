@@ -38,11 +38,10 @@ sudo docker run -it --rm \
  --standalone -d "$DOMAIN" --email "$CERTBOT_EMAIL" \
  --agree-tos --keep --non-interactive
 
-cd data/etc/letsencrypt/live/$DOMAIN/
-  cat fullchain.pem privkey.pem > haproxychain.pem
+# Concatenate the resulting certificate chain and the private key and write it to HAProxy's certificate file.
+cd data/etc/letsencrypt/live/${DOMAIN}/
+  cat fullchain.pem privkey.pem > ../../../haproxy/haproxychain.pem
 cd -
-
-chmod -R go+rx ./data/etc/letsencrypt/
 
 mv renew_certificate_job /etc/cron.d/renew_certificate_job
 chmod +x renew-certificate.sh
