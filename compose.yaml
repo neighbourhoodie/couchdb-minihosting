@@ -22,11 +22,11 @@ services:
       - ./data/etc/haproxy:/usr/local/etc/haproxy:ro
       - ./data/etc/letsencrypt:/etc/letsencrypt:ro
     restart: unless-stopped
-    entrypoint: /bin/sh -c "
-      cp /usr/local/etc/haproxy/haproxy.cfg /tmp/haproxy.cfg &&
-      echo \"sed -i \"s#COUCHDB_PATH#${COUCHDB_PATH}#g\" &&
-      sed -i \"s#COUCHDB_PATH#${COUCHDB_PATH}#g\" /tmp/haproxy.cfg &&
-      exec haproxy -f /tmp/haproxy.cfg"
+#    entrypoint: /bin/sh -c "
+#      cp /usr/local/etc/haproxy/haproxy.cfg /tmp/haproxy.cfg &&
+#      echo \"sed -i \"s#COUCHDB_PATH#${COUCHDB_PATH}#g\" &&
+#      sed -i \"s#COUCHDB_PATH#${COUCHDB_PATH}#g\" /tmp/haproxy.cfg &&
+#      exec haproxy -f /tmp/haproxy.cfg"
 
   nginx:
     environment:
