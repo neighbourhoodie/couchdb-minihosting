@@ -64,6 +64,6 @@ chown deploy /home/deploy/web
 curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_users
 curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_replicator
 
-echo "Running Fauxton at https://$DOMAIN/_api/_utils/"
+echo "Running Fauxton at https://$DOMAIN$COUCHDB_PATH/_utils/"
 
 echo "All Done!"
