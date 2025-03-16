@@ -23,8 +23,9 @@ services:
       - ./data/etc/letsencrypt:/etc/letsencrypt:ro
     restart: unless-stopped
     entrypoint: /bin/sh -c "
-      sed -i 's|\$COUCHDB_PATH|'\"$COUCHDB_PATH\"'|g' /usr/local/etc/haproxy/haproxy.cfg &&
-      exec haproxy -f /usr/local/etc/haproxy/haproxy.cfg"
+      cp /usr/local/etc/haproxy/haproxy.cfg /tmp/haproxy.cfg &&
+      sed -i 's|\$COUCHDB_PATH|'\"$COUCHDB_PATH\"'|g' /tmp/haproxy.cfg &&
+      exec haproxy -f /tmp/haproxy.cfg"
 
   nginx:
     environment:
