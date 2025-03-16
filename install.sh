@@ -64,6 +64,11 @@ chown deploy /home/deploy/web
 curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_users
 curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_replicator
 
+if [ "$ENABLE_CORS" = "true" ]; then
+  curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_node/nonode@nohost/_config/chttpd/enable_cors -d '"true"'
+  curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_node/nonode@nohost/_config/cors/origins -d "\"$ALLOWED_ORIGINS\""
+fi
+
 echo "Running Fauxton at https://$DOMAIN/_api/_utils/"
 
 echo "All Done!"
