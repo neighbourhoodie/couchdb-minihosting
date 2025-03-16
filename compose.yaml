@@ -13,6 +13,7 @@ services:
   haproxy:
     environment:
       DOMAIN: "${DOMAIN}"
+      COUCHDB_PATH: "${COUCHDB_PATH}"
     image: haproxy
     ports:
       - 80:80
@@ -21,6 +22,9 @@ services:
       - ./data/etc/haproxy:/usr/local/etc/haproxy:ro
       - ./data/etc/letsencrypt:/etc/letsencrypt:ro
     restart: unless-stopped
+    entrypoint: /bin/sh -c "
+      sed -i 's|\$COUCHDB_PATH|'\"$COUCHDB_PATH\"'|g' /usr/local/etc/haproxy/haproxy.cfg &&
+      exec haproxy -f /usr/local/etc/haproxy/haproxy.cfg"
 
   nginx:
     environment:
