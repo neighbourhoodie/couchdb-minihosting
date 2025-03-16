@@ -43,7 +43,8 @@ Copy `.env.default` to `.env` and fill out the environment variables:
 - `COUCHDB_USER` and `COUCHDB_PASS`: The credentials you’d like your CouchDB admin user to have. Make sure the password is long and unguessable.
 - `DOMAIN`: The domain pointing to your server, without the protocol (eg. `backend.lol`).
 - `CERTBOT_EMAIL`: An email address for certificate expiration notifications.
-
+- `ENABLE_CORS`: Set to `true` if you want to enable CORS for your CouchDB.
+- `ALLOWED_ORIGINS`: A comma-separated list of origins to allow CORS requests from. Only used if `ENABLE_CORS` is set to `true`.
 ```sh
 nano .env
 ```
