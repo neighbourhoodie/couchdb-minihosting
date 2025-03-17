@@ -13,6 +13,7 @@ services:
   haproxy:
     environment:
       DOMAIN: "${DOMAIN}"
+      COUCHDB_PATH: "${COUCHDB_PATH}"
     image: haproxy
     ports:
       - 80:80

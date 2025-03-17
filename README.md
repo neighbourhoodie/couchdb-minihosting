@@ -43,6 +43,7 @@ Copy `.env.default` to `.env` and fill out the environment variables:
 - `COUCHDB_USER` and `COUCHDB_PASS`: The credentials you’d like your CouchDB admin user to have. Make sure the password is long and unguessable.
 - `DOMAIN`: The domain pointing to your server, without the protocol (eg. `backend.lol`).
 - `CERTBOT_EMAIL`: An email address for certificate expiration notifications.
+- `COUCHDB_PATH`: The path where CouchDB will be mounted. If set to `/`, frontend will be disabled.'
 
 ```sh
 nano .env
