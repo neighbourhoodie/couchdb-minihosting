@@ -69,6 +69,9 @@ if [ "$ENABLE_CORS" = "true" ]; then
   curl -X PUT http://"$COUCHDB_USER":"$COUCHDB_PASS"@localhost:5984/_node/nonode@nohost/_config/cors/origins -d "\"$ALLOWED_ORIGINS\""
 fi
 
-echo "Running Fauxton at https://$DOMAIN/_api/_utils/"
+if [ "$COUCHDB_PATH" = "/" ]; then
+  COUCHDB_PATH=""
+fi
+echo "Running Fauxton at https://$DOMAIN${COUCHDB_PATH}/_utils/"
 
 echo "All Done!"
