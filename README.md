@@ -44,7 +44,8 @@ Copy `.env.default` to `.env` and fill out the environment variables:
 - `DOMAIN`: The domain pointing to your server, without the protocol (eg. `backend.lol`).
 - `CERTBOT_EMAIL`: An email address for certificate expiration notifications.
 - `COUCHDB_PATH`: The path where CouchDB will be mounted. If set to `/`, frontend will be disabled.'
-
+- `ENABLE_CORS`: Set to `true` if you want to enable CORS for your CouchDB.
+- `ALLOWED_ORIGINS`: A comma-separated list of origins to allow CORS requests from. Only used if `ENABLE_CORS` is set to `true`.
 ```sh
 nano .env
 ```
