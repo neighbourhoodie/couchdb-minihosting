@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import inquirer from 'inquirer'
+import { select } from '@inquirer/prompts'
 import axios from 'axios'
 import { NodeSSH } from 'node-ssh'
 
@@ -22,25 +22,31 @@ try {
   process.exit()
 }
 
-// curl -X GET \
-//   -H "Content-Type: application/json" \
-//   -H "Authorization: Bearer $DIGITALOCEAN_TOKEN" \
-//   "https://api.digitalocean.com/v2/droplets?page=1&per_page=1"
-
+let dropletIP = ''
 try {
-  const { data } = await axios.get(`${digitalOceanApiUrl}/droplets?page=1&per_page=10`, digitalOceanRequestConfig)
-  console.log('✅  Retrieved droplets', data.droplets.map(droplet => droplet.name))
-  const selectedDroplet = await inquirer.prompt(['Select droplet to connect to'])
+  const { data } = await axios.get(`${digitalOceanApiUrl}/droplets?page=1&per_page=100`, digitalOceanRequestConfig)
+  console.log(`✅  Droplets retrieved: ${data.droplets?.length} of ${data.meta.total}`)
+  const dropletOptions = data.droplets.map(droplet => ({
+    name: `${droplet.name} - (${droplet.image.description})`,
+    value: droplet
+  }))
+
+  const droplet = await select({
+    message: 'Select a droplet to connect to',
+    choices: dropletOptions,
+  })
+  dropletIP = droplet.networks?.v4[0]?.ip_address
+  console.log('✅  Droplet IP', dropletIP)
 } catch (error) {
-  console.error('Error retrieving droplets', error.response?.data)
+  console.error('Error retrieving droplets', error)
   process.exit()
 }
 
-
 const ssh = new NodeSSH()
 try {
+  console.log('Attempting to connect to droplet via SSH, ip:', dropletIP)
   await ssh.connect({
-    host: process.env.HOST,
+    host: dropletIP,
     username: 'root',
     privateKeyPath: '/Users/david/.ssh/id_ed25519'
   })
@@ -51,29 +57,28 @@ try {
 }
 
 try {
-  const output = await ssh.exec('whoami', [], {
+  const sessionUser = await ssh.exec('whoami', [], {
     cwd: '/root/',
     stream: 'stdout',
     options: { pty: true }
   })
-  console.log('✅  Executed command on droplet as', output)
-} catch (error) {
-  console.error('❌  Error executing command on droplet', error.message)
-  process.exit()
-}
+  console.log('✅  Executed command on droplet as', sessionUser)
 
-try {
-  const output = await ssh.exec('whoami', [], {
+  const output = await ssh.exec('git clone', ['https://github.com/neighbourhoodie/couchdb-minihosting.git'], {
     cwd: '/root/',
-    stream: 'stdout',
+    onStdout(chunk) {
+      console.log('stdoutChunk', chunk.toString('utf8'))
+    },
+    onStderr(chunk) {
+      console.log('stderrChunk', chunk.toString('utf8'))
+    },
     options: { pty: true }
   })
-  console.log('✅  git', output)
+  console.log('✅  Repository cloned', output)
 } catch (error) {
   console.error('❌  Error executing command on droplet', error.message)
   process.exit()
 }
-
 
 process.exit()
 
