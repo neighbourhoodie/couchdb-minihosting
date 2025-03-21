@@ -16,7 +16,7 @@ const digitalOceanRequestConfig = {
 
 try {
   const { data } = await axios.get(`${digitalOceanApiUrl}/account`, digitalOceanRequestConfig)
-  console.log(`✅  Logged in as ${data.account?.name}`)
+  console.log(`✔ Logged in as ${data.account?.name}`)
 } catch (error) {
   console.error('Error connecting to Digital Ocean API ', error.response?.data)
   process.exit()
@@ -25,7 +25,7 @@ try {
 let dropletIP = ''
 try {
   const { data } = await axios.get(`${digitalOceanApiUrl}/droplets?page=1&per_page=100`, digitalOceanRequestConfig)
-  console.log(`✅  Droplets retrieved: ${data.droplets?.length} of ${data.meta.total}`)
+  console.log(`✔ Droplets retrieved: ${data.droplets?.length} of ${data.meta.total}`)
   const dropletOptions = data.droplets.map(droplet => ({
     name: `${droplet.name} - (${droplet.image.description})`,
     value: droplet
@@ -36,7 +36,7 @@ try {
     choices: dropletOptions,
   })
   dropletIP = droplet.networks?.v4[0]?.ip_address
-  console.log('✅  Droplet IP', dropletIP)
+  console.log('✔ Droplet IP', dropletIP)
 } catch (error) {
   console.error('Error retrieving droplets', error)
   process.exit()
@@ -50,10 +50,10 @@ try {
     username: 'root',
     privateKeyPath: '/Users/david/.ssh/id_ed25519'
   })
-  console.log('✅  Connected to droplet via SSH connected')
+  console.log('✔ Connected to droplet via SSH connected')
 } catch (error) {
-  console.error('Error connecting to new droplet via SSH', error.message)
-  process.exit()
+  console.error('Error connecting to new droplet via SSH', error)
+  terminate()
 }
 
 try {
@@ -62,23 +62,36 @@ try {
     stream: 'stdout',
     options: { pty: true }
   })
-  console.log('✅  Executed command on droplet as', sessionUser)
+  console.log('✔ Executed command on droplet as', sessionUser)
 
-  const output = await ssh.exec('git clone', ['https://github.com/neighbourhoodie/couchdb-minihosting.git'], {
-    cwd: '/root/',
+  await ssh.exec('git',
+    ['clone', '--quiet', 'https://github.com/neighbourhoodie/couchdb-minihosting.git'],
+    { cwd: '/root/' }
+  )
+
+  console.log('✔ Repository cloned')
+
+  await ssh.exec('./install.sh', [], {
+    cwd: '/root/couchdb-minihosting',
     onStdout(chunk) {
-      console.log('stdoutChunk', chunk.toString('utf8'))
+      console.log(chunk.toString('utf8'))
     },
     onStderr(chunk) {
-      console.log('stderrChunk', chunk.toString('utf8'))
+      console.log(chunk.toString('utf8'))
     },
-    options: { pty: true }
   })
-  console.log('✅  Repository cloned', output)
+  console.log('✔ Repository cloned')
+
 } catch (error) {
+  console.log(error)
   console.error('❌  Error executing command on droplet', error.message)
-  process.exit()
+  terminate()
 }
 
-process.exit()
+terminate()
+function terminate() {
+  console.log('Terminating connection')
+  ssh.dispose()
+  process.exit()
+}
 
