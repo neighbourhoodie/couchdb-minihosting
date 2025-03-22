@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@inquirer/editor": "^4.2.9",
     "@inquirer/prompts": "^7.4.0",
     "axios": "^1.8.4",
     "dotenv": "^16.4.7",
