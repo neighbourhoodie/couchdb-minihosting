@@ -29,7 +29,7 @@ mkdir -p ./data/etc/letsencrypt
 mkdir -p ./data/var/lib/letsencrypt
 mkdir -p ./data/couchdb
 
-sudo docker run -it --rm \
+sudo docker run --rm \
  -p 80:80 -p 443:443 \
  --name certbot \
  -v "$PWD/data/etc/letsencrypt:/etc/letsencrypt" \
