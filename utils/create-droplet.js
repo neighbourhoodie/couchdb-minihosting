@@ -78,7 +78,7 @@ async function getSSHConnection () {
     await ssh.connect({
       host: dropletIp,
       username: 'root',
-      privateKeyPath: '/Users/david/.ssh/id_ed25519'
+      privateKeyPath: process.env.SSH_PRIVATE_KEY_PATH
     })
     return ssh
 
@@ -112,7 +112,7 @@ async function executeCommandOnDroplet (command, args = [], options = {}) {
 
 async function buildEnvFile () {
   return editor({
-    message: 'Edit the environment file',
+    message: 'Edit .env file',
     default: fs.readFileSync('../.env.default', 'utf8')
   })
 }
