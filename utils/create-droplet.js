@@ -53,7 +53,7 @@ async function getDigitalOceanUser () {
 
 async function getDropletIp () {
   try {
-    const { data } = await axios.get(`${digitalOceanApiUrl}/droplets?page=1&per_page=100`, digitalOceanRequestConfig)
+    const { data } = await axios.get(`${digitalOceanApiUrl}/droplets?page=1&per_page=100&tag_name=${process.env.DROPLETS_TAG}`, digitalOceanRequestConfig)
     const dropletOptions = data.droplets.map(droplet => ({
       name: `${droplet.name} - (${droplet.image.description})`,
       value: droplet
