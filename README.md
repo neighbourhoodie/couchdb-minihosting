@@ -15,7 +15,7 @@ CouchDB Minihosting is a great starting point for hosting smaller CouchDB projec
   - redirect all requests to `/_api` to that CouchDB
   - handle letsencrypt/certbot for continuous TLS certificates
   - optionally host your web project at `/`
-- A deploy script that will let you deploy or roll back your web project
+- A deploy script that will let you deploy or roll back your web project. We’ve provided a small example project called Pouchnotes for you to use: [GitHub](https://github.com/neighbourhoodie/pouchnotes), [Blog Post](https://neighbourhood.ie/blog/2025/03/26/offline-first-with-couchdb-and-pouchdb-in-2025).
 
 We are using Docker Compose to set all this up for you.
 
