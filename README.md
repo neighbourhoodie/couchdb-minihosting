@@ -67,7 +67,7 @@ This repo also contains a deploy script. This is meant to be copied into the rep
 
 For more details on the deploy and rollback scripts, please check out the [`/deployment/README.md`](/deployment/README.md).
 
-To get you started, we provide [Pouchnotes](https://github.com/neighbourhoodie/pouchnotes/), a demo project that gets you started with PouchDB, authentitation and replication.
+To get you started, we provide [Pouchnotes](https://github.com/neighbourhoodie/pouchnotes/), a demo project that gets you started with PouchDB, authentication and replication.
 
 ## Automatic Certificate Renewal
 
@@ -78,7 +78,7 @@ Certificate renewal is done via a CRON job on the first of each month. The CRON 
 
 ## Tips and Tricks
 
-Some useful Docker commands
+Some useful Docker commands:
 
 ```sh
 # See which Docker containers are running
