@@ -58,6 +58,11 @@ async function getDropletIp () {
       name: `${droplet.name} - (${droplet.image.description})`,
       value: droplet
     }))
+    
+    if (dropletOptions.length === 0) {
+      console.error('No droplets found with the specified tag:', process.env.DROPLETS_TAG)
+      process.exit()
+    }
 
     const droplet = await select({
       message: 'Select a droplet to connect to',
