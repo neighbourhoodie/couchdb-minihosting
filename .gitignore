@@ -1,6 +1,9 @@
 *~
 data/couchdb
 data/etc/letsencrypt
+utils/node_modules
+utils/.env
+.idea
 dist
 .DS_Store
 *.tgz
