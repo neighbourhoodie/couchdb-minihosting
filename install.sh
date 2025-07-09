@@ -21,8 +21,9 @@ mkdir -p /home/deploy/.ssh
 cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
 chown -R deploy:deploy /home/deploy/.ssh
 
-echo "Installing docker-compose…"
-apt install -y docker-compose
+echo "Updating and installing required packages…"
+apt update
+apt install -y curl docker-compose
 
 echo "Setting up Letsencrypt…"
 mkdir -p ./data/etc/letsencrypt
